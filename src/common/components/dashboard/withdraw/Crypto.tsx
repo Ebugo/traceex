@@ -190,7 +190,7 @@ const Crypto = () => {
             <Grid item xs={12}>
               <Grid container xs={12}>
                 {networkItems.map(({ title, subtitle }, i) => (
-                  <Grid item xs={12} md={6}>
+                  <Grid key={i} item xs={12} md={6}>
                     <ListItemText
                       key={i}
                       primary={title}
