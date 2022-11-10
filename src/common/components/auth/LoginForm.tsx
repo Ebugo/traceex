@@ -81,7 +81,7 @@ const LoginForm = () => {
                   provider='google'>
                   <Box display="flex" sx={{ alignItems: "center" }} gap={1}>
                     <GoogleIcon />
-                    <Typography variant=''>Sign in with Google</Typography>
+                    <Typography variant='inherit'>Sign in with Google</Typography>
                   </Box>
                 </SocialButton>
               </Grid>
@@ -93,7 +93,7 @@ const LoginForm = () => {
                   provider='facebook'>
                   <Box display="flex" sx={{ alignItems: "center" }} gap={1}>
                     <FbIcon />
-                    <Typography variant=''>Sign in with Facebook</Typography>
+                    <Typography variant='inherit'>Sign in with Facebook</Typography>
                   </Box>
                 </SocialButton>
               </Grid>
