@@ -1,8 +1,6 @@
 import { CircularProgress, FormControl, FormLabel, Grid, List, ListItem, ListItemIcon, ListItemText, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import ActionBar from '../../UI/ActionBar';
 
-import ProductDialog from './components/ProductDialog';
-import useProduct from '../../../hooks/useProduct';
 import { RootState, useSelector } from '../../../redux/store';
 import { Form, FormikProvider } from 'formik';
 import useDepositForm from '../../../hooks/useDepositForm';
@@ -11,15 +9,8 @@ import { COINS, NETWORKS } from '../../../constants';
 import DynamicHeroIcon from '../../../elements/icons/DynamicHeroIcon';
 
 const Crypto = () => {
-  const {
-    showDialog,
-    closeProductDialogHandler,
-  } = useProduct();
-
   const { depositFormik, fetchingAddress } = useDepositForm();
   const { touched, errors, values, getFieldProps } = depositFormik;
-
-  const { products } = useSelector((state: RootState) => state.productSlice);
 
   const networkItems = [
     { title: "Expected arrival", subtitle: "1 network confirmations" },
@@ -30,13 +21,6 @@ const Crypto = () => {
 
   return (
     <>
-      {showDialog && (
-        <ProductDialog
-          showDialog={showDialog}
-          onCloseDialog={closeProductDialogHandler}
-        />
-      )}
-
       <Stack>
         <ActionBar
           title="Deposit Crypto"

@@ -1,13 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { Customer, Invoice, Order } from '../../../_types';
+import { Customer } from '../../../_types';
 
 type CustomerSliceInitialState = {
   isLoading: boolean;
   error: Record<string, unknown>;
   customers: Customer[];
   customer: Customer | null;
-  orders: Order[];
-  invoices: Invoice[];
 };
 
 const initialState: CustomerSliceInitialState = {
@@ -15,8 +13,6 @@ const initialState: CustomerSliceInitialState = {
   error: {},
   customers: [],
   customer: null,
-  orders: [],
-  invoices: [],
 };
 
 export const customerSlice = createSlice({
@@ -41,19 +37,9 @@ export const customerSlice = createSlice({
       state.isLoading = false;
       state.customer = action.payload;
     },
-    getCustomerOrdersSuccess(state, action: { payload: Order[] }) {
-      state.isLoading = false;
-      state.orders = action.payload;
-    },
-    getCustomerInvoicesSuccess(state, action: { payload: Invoice[] }) {
-      state.isLoading = false;
-      state.invoices = action.payload;
-    },
     clearCustomer(state) {
       state.isLoading = false;
       state.customer = initialState.customer;
-      state.orders = initialState.orders;
-      state.invoices = initialState.invoices;
     },
   },
 });

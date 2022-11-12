@@ -7,6 +7,7 @@ type WalletSliceInitialState = {
   wallet: Wallet | null;
   transactions: Array<Transaction>;
   address: string;
+  banks: Array<any>;
 };
 
 const initialState: WalletSliceInitialState = {
@@ -15,6 +16,7 @@ const initialState: WalletSliceInitialState = {
   wallet: null,
   transactions: [],
   address: "",
+  banks: []
 };
 
 export const walletSlice = createSlice({

@@ -13,37 +13,12 @@ export type {
   UpdateProfile,
 } from './Authentication';
 
-export type { Service, CreateService, UpdateService } from './Service';
-
-export type {
-  Product,
-  ProductFormik,
-  CreateProduct,
-  UpdateProduct,
-  DispatchSetProducts,
-} from './Product';
-
-export type {
-  StoreFront,
-  CreateStoreFront,
-  UpdateStoreFront,
-} from './StoreFront';
-
 export type {
   Customer,
   CreateCustomer,
   UpdateCustomer,
   DispatchSetCustomer,
 } from './Customer';
-
-export type {
-  Order,
-  OrderForm,
-  CreateOrder,
-  OrderStatus,
-  CreateInvoice,
-  DispatchSetOrder,
-} from './Order';
 
 export type { CustomDialogProp } from './Dialog';
 
@@ -63,5 +38,3 @@ export type {
 export type { CustomFile, UploadFileType, SingleUploadProps } from './Upload';
 
 export type { Team, CreateTeamMember, UpdateTeamMember } from './Team';
-
-export type { Invoice } from './Invoice';

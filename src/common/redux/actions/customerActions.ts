@@ -3,8 +3,6 @@ import { dispatch } from '../store';
 import {
   getCustomersApi,
   getCustomerByIdApi,
-  getCustomerOrdersApi,
-  getCustomerInvoicesApi,
 } from '../../../_apis_/customer';
 import { Customer } from '../../../_types';
 
@@ -32,31 +30,6 @@ export function getCustomerById(customerId: Customer['id']) {
       const { data } = response;
 
       dispatch(slice.actions.getCustomerByIdSuccess(data));
-    } catch (err: unknown) {
-      dispatch(slice.actions.hasError(err));
-    }
-  };
-}
-
-export function getCustomerOrders(customerId: Customer['id']) {
-  return async () => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const { data } = await getCustomerOrdersApi(customerId);
-
-      dispatch(slice.actions.getCustomerOrdersSuccess(data));
-    } catch (err: unknown) {
-      dispatch(slice.actions.hasError(err));
-    }
-  };
-}
-export function getCustomerInvoices(customerId: Customer['id']) {
-  return async () => {
-    dispatch(slice.actions.startLoading());
-    try {
-      const { data } = await getCustomerInvoicesApi(customerId);
-
-      dispatch(slice.actions.getCustomerInvoicesSuccess(data));
     } catch (err: unknown) {
       dispatch(slice.actions.hasError(err));
     }

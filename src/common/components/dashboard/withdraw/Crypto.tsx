@@ -1,24 +1,14 @@
 import { CircularProgress, FormControl, FormLabel, Grid, ListItemText, MenuItem, Stack, TextField, Typography } from '@mui/material';
 import ActionBar from '../../UI/ActionBar';
 
-import ProductDialog from './components/ProductDialog';
-import useProduct from '../../../hooks/useProduct';
-import { RootState, useSelector } from '../../../redux/store';
 import { Form, FormikProvider } from 'formik';
 import useDepositForm from '../../../hooks/useDepositForm';
 import ErrorHelperText from '../../UI/ErrorHelperText';
 import { COINS, NETWORKS } from '../../../constants';
 
 const Crypto = () => {
-  const {
-    showDialog,
-    closeProductDialogHandler,
-  } = useProduct();
-
   const { depositFormik, fetchingAddress } = useDepositForm();
   const { touched, errors, values, getFieldProps } = depositFormik;
-
-  const { products } = useSelector((state: RootState) => state.productSlice);
 
   const networkItems = [
     { title: "BTC balance", subtitle: "0 BTC" },
@@ -29,13 +19,6 @@ const Crypto = () => {
 
   return (
     <>
-      {showDialog && (
-        <ProductDialog
-          showDialog={showDialog}
-          onCloseDialog={closeProductDialogHandler}
-        />
-      )}
-
       <Stack>
         <ActionBar
           title="Withdraw Crypto"
