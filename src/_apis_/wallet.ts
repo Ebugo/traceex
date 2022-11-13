@@ -1,3 +1,4 @@
+import { getExchangeApi } from '.';
 import {
   HttpSuccessResponse,
   Wallet,
@@ -6,16 +7,29 @@ import {
   Withdraw,
   AccountNameLookup,
 } from '../_types';
+import { Token, WithdrawApi } from '../_types/Wallet';
 import httpService from './httpService';
 
-export const getWalletApi = async (): Promise<HttpSuccessResponse<Wallet>> => {
-  return httpService.get(`wallet`);
+export const getWalletApi = async (token: string, network: string): Promise<HttpSuccessResponse<Wallet>> => {
+  return httpService.get(getExchangeApi() + `wallet`, { 
+    params: {
+      token, network
+    }
+  });
+};
+
+export const getWalletsApi = async (): Promise<HttpSuccessResponse<Wallet[]>> => {
+  return httpService.get(getExchangeApi() + `wallets`);
+};
+
+export const getBalancesApi = async (): Promise<HttpSuccessResponse<Wallet>> => {
+  return httpService.get(`balances`);
 };
 
 export const getTransactionsApi = async (): Promise<
   HttpSuccessResponse<Transaction[]>
 > => {
-  return httpService.get(`transaction`);
+  return httpService.get(getExchangeApi() + `transactions`);
 };
 
 export const updateTransactionPinApi = async (
@@ -32,7 +46,7 @@ export const getAddressApi = async (): Promise<HttpSuccessResponse<string>> => {
 
 export const getAccountNameApi = async (
   selectedBankCode: Bank['code'],
-  accountNumber: Withdraw['account_number']
+  accountNumber: Withdraw['network']
 ): Promise<HttpSuccessResponse<AccountNameLookup>> => {
   return httpService.get(`payment/accountname`, {
     params: { selectedBankCode, accountNumber },
@@ -40,7 +54,12 @@ export const getAccountNameApi = async (
 };
 
 export const withdrawFundsApi = async (
-  payload: Withdraw
+  payload: WithdrawApi
 ): Promise<HttpSuccessResponse<Transaction>> => {
-  return httpService.post('wallet/withdraw', payload);
+  return httpService.post(getExchangeApi() + 'send-crypto', payload);
+};
+
+export const getCoinsApi = async (
+): Promise<HttpSuccessResponse<Token[]>> => {
+  return httpService.get('misc/tokens');
 };

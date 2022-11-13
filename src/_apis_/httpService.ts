@@ -1,8 +1,11 @@
 import axios from 'axios';
 
-export const baseApiUrl = process.env.NEXT_PUBLIC_DEV_URL;
+export const baseApiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-const httpService = axios.create({ baseURL: baseApiUrl });
+const httpService = axios.create({
+  baseURL: baseApiUrl,
+  headers: { 'x-api-key': process.env.NEXT_PUBLIC_API_KEY || "" }
+});
 
 httpService.interceptors.response.use(
   (response) => {

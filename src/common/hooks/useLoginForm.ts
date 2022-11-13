@@ -37,11 +37,11 @@ const useLoginForm = () => {
       try {
         const { email, password } = values;
 
-        // await login(email, password, (response) => {
-        //   toast.success(response.message);
+        await login(email, password, (response) => {
+          toast.success(response.message);
 
           router.push('/dashboard');
-        // });
+        });
       } catch (error: unknown) {
         toast.error(
           (error as HttpErrorResponse)?.message ||

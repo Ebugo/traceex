@@ -43,7 +43,7 @@ const LoginForm = () => {
           rowSpacing={2}
           sx={{ backgroundColor: (theme) => theme.palette.background.paper }}>
           <Grid item xs={12}>
-            {medium && (
+            {/* {medium && ( */}
               <Typography
                 variant="h4"
                 component="div"
@@ -53,7 +53,7 @@ const LoginForm = () => {
               >
                 Sign In
               </Typography>
-            )}
+            {/* )} */}
 
             <Typography
               variant="caption"
@@ -67,7 +67,7 @@ const LoginForm = () => {
             </Typography>
           </Grid>
 
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Grid
               container
               mt={3}
@@ -98,7 +98,7 @@ const LoginForm = () => {
                 </SocialButton>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} my={2}>
             <Typography
@@ -167,7 +167,7 @@ const LoginForm = () => {
               }
             />
 
-            <Grid container justifyContent="flex-end">
+            {/* <Grid container justifyContent="flex-end">
               <CustomLink
                 href="/auth/forgot-password"
                 variant="details"
@@ -175,7 +175,7 @@ const LoginForm = () => {
               >
                 Forgot Password?
               </CustomLink>
-            </Grid>
+            </Grid> */}
           </Grid>
 
           <Grid item xs={12} mt={4}>

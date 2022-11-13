@@ -1,35 +1,47 @@
 export interface Wallet {
   id: string;
-  created_at: string;
-  updated_at: string;
-  business: string;
-  balance: string;
-  previous_balance: string;
-  pin: string | null;
-  hasPin: boolean;
+  address: string;
+  app: any;
+  contact: any;
+  createdAt: string;
+  expiresAt: null | string;
+  index: number;
+  onChainBalance: string;
+  platformBalance: string;
+  targetAmount: null | string;
+  token: any;
+  totalRecieved: string;
+  totalSpent: string;
+  updatedAt: string;
 }
 
 export interface Transaction {
   id: string;
-  created_at: string;
-  updated_at: string;
-  business: string;
-  fees: string;
-  reference: string;
-  event: string;
   amount: string;
-  channel: string;
+  confirmed: boolean;
+  createdAt: string;
+  metadata: any;
+  shouldAggregate: boolean;
   type: string;
-  user: string;
-  // previousBalance: string; // computed
+  updatedAt: string;
+  wallet: Wallet;
+
+}
+
+export interface WithdrawApi {
+  amount: string;
+  to: string;
+  token: string;
+  network: string;
+  blockchain: string;
 }
 
 export interface Withdraw {
-  account_number: string;
   amount: string;
-  bank_code: string;
-  account_name: string;
-  pin: string;
+  to: string;
+  coin: string;
+  network: string;
+  blockchain: string;
 }
 
 export interface Deposit {
@@ -61,4 +73,18 @@ export interface AccountNameLookup {
   account_name: string;
   account_number: string;
   bank_id: number;
+}
+
+export interface Token {
+  decimals: number;
+  minimumDrainAmount: number;
+  contractAddress: null | string;
+  symbol: string;
+  name: string;
+  blockchain: string;
+  network: string;
+  coinGeckoId: string;
+  isNativeToken: boolean;
+  isStableToken: boolean;
+  verified: boolean;
 }

@@ -2,19 +2,29 @@ import { CircularProgress, FormControl, FormLabel, Grid, ListItemText, MenuItem,
 import ActionBar from '../../UI/ActionBar';
 
 import { Form, FormikProvider } from 'formik';
-import useDepositForm from '../../../hooks/useDepositForm';
 import ErrorHelperText from '../../UI/ErrorHelperText';
-import { COINS, NETWORKS } from '../../../constants';
+import { RootState, useSelector } from '../../../redux/store';
+import BigNumber from 'bignumber.js';
+import { LoadingButton } from '@mui/lab';
+import useWithdrawForm from '../../../hooks/useWithdrawForm';
+import useCoins from '../../../hooks/useCoins';
 
 const Crypto = () => {
-  const { depositFormik, fetchingAddress } = useDepositForm();
-  const { touched, errors, values, getFieldProps } = depositFormik;
+  const { coins, wallet } = useSelector(
+    (state: RootState) => state.walletSlice
+  );
+  console.log({ coins, wallet })
+  const { fetchingCoins } = useCoins();
+
+  const balance = new BigNumber(!isNaN(Number(wallet?.platformBalance)) ? Number(wallet?.platformBalance) : 0).div(10 ** wallet?.token?.decimals).toFixed();
+  const { withdrawFormik } = useWithdrawForm(Number(balance));
+  const { touched, errors, values, getFieldProps, isValid, isSubmitting } = withdrawFormik;
 
   const networkItems = [
-    { title: "BTC balance", subtitle: "0 BTC" },
-    { title: "Minimum withdrawal", subtitle: "0.00001 BTC" },
-    { title: "Network fee", subtitle: "0.000005 ~ 0.0002 BTC" },
-    { title: "24h remaining limit", subtitle: "8,000,000.00 BUSD/8,000,000.00 BUSD" },
+    { title: `${wallet?.token?.symbol} balance`, subtitle: `${balance} ${wallet?.token?.symbol}` },
+    // { title: "Minimum withdrawal", subtitle: "0.00001 BTC" },
+    // { title: "Network fee", subtitle: "0.000005 ~ 0.0002 BTC" },
+    // { title: "24h remaining limit", subtitle: "8,000,000.00 BUSD/8,000,000.00 BUSD" },
   ]
 
   return (
@@ -29,7 +39,7 @@ const Crypto = () => {
 
         <Grid container xs={12} md={8} pl={4}>
           <Grid item xs={12}>
-            <FormikProvider value={depositFormik}>
+            <FormikProvider value={withdrawFormik}>
               <Form noValidate autoComplete="off" >
                 <Grid container rowSpacing={2} mt={3}>
                   <Grid item xs={12} md={4} sx={{ mb: 3 }}>
@@ -46,7 +56,7 @@ const Crypto = () => {
                   <Grid item xs={12} md={8}>
                     <FormControl fullWidth>
                       <FormLabel
-                        error={Boolean(touched.coin && errors.coin)}
+                        error={Boolean(touched.token && errors.token)}
                       >
                         Coin
                       </FormLabel>
@@ -58,27 +68,27 @@ const Crypto = () => {
                             borderRadius: '8px',
                           },
                         }}
-                        {...getFieldProps('coin')}
-                        value={values.coin ?? ''}
+                        {...getFieldProps('token')}
+                        value={values.token ?? ''}
                         SelectProps={{
                           displayEmpty: true,
                         }}
-                        error={Boolean(touched.coin && errors.coin)}
+                        error={Boolean(touched.token && errors.token)}
                         helperText={
                           <ErrorHelperText
-                            touched={touched.coin}
-                            errorMessage={errors.coin}
+                            touched={touched.token}
+                            errorMessage={errors.token}
                           />
                         }
                       >
                         <MenuItem value="">Select coin</MenuItem>
-                        {COINS.map((option) => (
+                        {coins.map((option) => (
                           <MenuItem
-                            key={option.value}
-                            value={option.value}
+                            key={option.symbol}
+                            value={option.symbol}
                             sx={{ fontSize: '0.875rem' }}
                           >
-                            {option.label}
+                            {option.name}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -101,7 +111,7 @@ const Crypto = () => {
                   <Grid item xs={12} md={8}>
                     <FormControl fullWidth>
                       <FormLabel
-                        error={Boolean(touched.address && errors.address)}
+                        error={Boolean(touched.to && errors.to)}
                       >
                         Address
                       </FormLabel>
@@ -113,13 +123,13 @@ const Crypto = () => {
                             borderRadius: '8px',
                           },
                         }}
-                        {...getFieldProps('address')}
-                        value={values.address ?? ''}
-                        error={Boolean(touched.address && errors.address)}
+                        {...getFieldProps('to')}
+                        value={values.to ?? ''}
+                        error={Boolean(touched.to && errors.to)}
                         helperText={
                           <ErrorHelperText
-                            touched={touched.address}
-                            errorMessage={errors.address}
+                            touched={touched.to}
+                            errorMessage={errors.to}
                           />
                         }
                       />
@@ -152,16 +162,53 @@ const Crypto = () => {
                         }
                       >
                         <MenuItem value="">Select network</MenuItem>
-                        {NETWORKS.map((option) => (
+                        {coins.filter(coin => coin?.symbol === values?.token).map(({ network }, i) => (
                           <MenuItem
-                            key={option.value}
-                            value={option.value}
+                            key={i}
+                            value={network}
                             sx={{ fontSize: '0.875rem' }}
                           >
-                            {option.label}
+                            {network}
                           </MenuItem>
                         ))}
                       </TextField>
+                    </FormControl>
+                    <FormControl fullWidth>
+                      <FormLabel
+                        error={Boolean(touched.amount && errors.amount)}
+                      >
+                        Amount
+                      </FormLabel>
+                      <TextField
+                        placeholder='Enter Amount of Token to send'
+                        autoComplete="off"
+                        InputProps={{
+                          style: {
+                            borderRadius: '8px',
+                          },
+                        }}
+                        {...getFieldProps('amount')}
+                        value={values.amount ?? ''}
+                        error={Boolean(touched.amount && errors.amount)}
+                        helperText={
+                          <ErrorHelperText
+                            touched={touched.amount}
+                            errorMessage={errors.amount}
+                          />
+                        }
+                      />
+                    </FormControl>
+                    <FormControl fullWidth>
+                      <LoadingButton
+                        disableElevation
+                        disabled={!isValid}
+                        loading={isSubmitting}
+                        variant="contained"
+                        fullWidth
+                        type="submit"
+                      >
+                        Withdraw
+                      </LoadingButton>
                     </FormControl>
                   </Grid>
                 </Grid>
@@ -169,7 +216,7 @@ const Crypto = () => {
             </FormikProvider>
           </Grid>
 
-          <Grid container xs={12} py={4} md={8} ml="auto">
+          {wallet && wallet?.token && wallet?.platformBalance && <Grid container xs={12} py={4} md={8} ml="auto">
             <Grid item xs={12}>
               <Grid container xs={12}>
                 {networkItems.map(({ title, subtitle }, i) => (
@@ -195,7 +242,7 @@ const Crypto = () => {
                 ))}
               </Grid>
             </Grid>
-          </Grid>
+          </Grid>}
         </Grid>
       </Stack>
     </>

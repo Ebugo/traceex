@@ -7,15 +7,21 @@ import useDepositForm from '../../../hooks/useDepositForm';
 import ErrorHelperText from '../../UI/ErrorHelperText';
 import { COINS, NETWORKS } from '../../../constants';
 import DynamicHeroIcon from '../../../elements/icons/DynamicHeroIcon';
+import useCoins from '../../../hooks/useCoins';
 
 const Crypto = () => {
+  const { coins, wallet } = useSelector(
+    (state: RootState) => state.walletSlice
+  );
+  console.log({ coins })
+  const { fetchingCoins } = useCoins();
   const { depositFormik, fetchingAddress } = useDepositForm();
   const { touched, errors, values, getFieldProps } = depositFormik;
 
   const networkItems = [
-    { title: "Expected arrival", subtitle: "1 network confirmations" },
-    { title: "Expected unlock", subtitle: "2 network confirmations" },
-    { title: "Minimum deposit", subtitle: "0.00000001 BTC" },
+    // { title: "Expected arrival", subtitle: "1 network confirmations" },
+    // { title: "Expected unlock", subtitle: "2 network confirmations" },
+    // { title: "Minimum deposit", subtitle: "0.00000001 BTC" },
     { title: "Selected wallet", subtitle: "Spot Wallet" },
   ]
 
@@ -74,13 +80,13 @@ const Crypto = () => {
                         }
                       >
                         <MenuItem value="">Select coin</MenuItem>
-                        {COINS.map((option) => (
+                        {coins.map((option) => (
                           <MenuItem
-                            key={option.value}
-                            value={option.value}
+                            key={option.symbol}
+                            value={option.symbol}
                             sx={{ fontSize: '0.875rem' }}
                           >
-                            {option.label}
+                            {option.name}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -128,14 +134,14 @@ const Crypto = () => {
                           />
                         }
                       >
-                        <MenuItem value="">Select network</MenuItem>
-                        {NETWORKS.map((option) => (
+                        <MenuItem value="">{fetchingCoins ? "Fetching networks" : "Select network"}</MenuItem>
+                        {coins.filter(coin => coin.symbol === values.coin).map(({ network }, i) => (
                           <MenuItem
-                            key={option.value}
-                            value={option.value}
+                            key={i}
+                            value={network}
                             sx={{ fontSize: '0.875rem' }}
                           >
-                            {option.label}
+                            {network}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -153,12 +159,12 @@ const Crypto = () => {
                   <CircularProgress color="inherit" size={20} />
                 </Grid>
               )
-              : (
-                <>
+              : (wallet
+                ? (<>
                   <Grid item xs={12}>
                     <ListItemText
                       primary="Address"
-                      secondary={values.address || "1G4WhszkFjwH3dcmwjP4n3Wp4mY2HwmMPn"}
+                      secondary={wallet.address}
                       primaryTypographyProps={{
                         fontSize: '0.875rem',
                         fontWeight: 500,
@@ -235,7 +241,28 @@ const Crypto = () => {
                     </List>
 
                   </Grid>
-                </>
+                </>)
+                : (
+                  <Grid item xs={12}>
+                    <ListItemText
+                      primary="Address"
+                      secondary="Address not found!"
+                      primaryTypographyProps={{
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        lineHeight: '24px',
+                        pb: 1,
+                        color: (theme) => theme.palette.success.light
+                      }}
+                      secondaryTypographyProps={{
+                        fontSize: '0.75rem',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                        color: "red"
+                      }}
+                    />
+                  </Grid>
+                )
               )}
           </Grid>)}
         </Grid>

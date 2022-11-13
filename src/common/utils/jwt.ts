@@ -18,6 +18,7 @@ const isValidToken = (accessToken: string) => {
 };
 
 const setSession = (accessToken: string | null) => {
+
   if (!accessToken) {
     localStorage.removeItem('accessToken');
     delete httpService.defaults.headers.common.Authorization;
@@ -25,7 +26,8 @@ const setSession = (accessToken: string | null) => {
   }
 
   localStorage.setItem('accessToken', accessToken);
-  httpService.defaults.headers.common['x-access-token'] = accessToken;
+  // httpService.defaults.headers.common['Accept'] = "application/json";
+  httpService.defaults.headers.common['Authorization'] = "Bearer " + accessToken;
 };
 
 const setRefreshTimeout = (interval = 60 * 60 * 1000) => {

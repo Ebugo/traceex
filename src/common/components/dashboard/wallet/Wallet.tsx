@@ -7,24 +7,28 @@ import BalanceCard from './components/BalanceCard';
 import { RootState, useSelector } from '../../../redux/store';
 import RecentTransactions from './components/RecentTransactions';
 import { useRouter } from 'next/router';
+import BigNumber from 'bignumber.js';
+import useTransactions from '../../../hooks/useTransactions';
 
 const Wallet = () => {
   const router = useRouter();
 
   const { fetchingWallet } = useWallet();
+  const { fetchingTransactions } = useTransactions();
 
-  const { wallet, transactions } = useSelector(
+  const { wallet, wallets, transactions } = useSelector(
     (state: RootState) => state.walletSlice
   );
+  // console.log({ wallet, wallets, transactions })
 
-  const withdrawButtonHandler = () => {
-    if (wallet?.hasPin) {
-      router.push('/dashboard/wallet/withdraw');
-      return;
-    }
+  // const withdrawButtonHandler = () => {
+  //   if (wallet?.hasPin) {
+  //     router.push('/dashboard/wallet/withdraw');
+  //     return;
+  //   }
 
-    router.push('/dashboard/wallet/set-transaction-pin');
-  };
+  //   router.push('/dashboard/wallet/set-transaction-pin');
+  // };
 
   return (
     <>
@@ -38,14 +42,18 @@ const Wallet = () => {
           mt={0.5}
           sx={{ width: '100%', maxWidth: '740px' }}
         >
-          <BalanceCard
-            fetchingWallet={fetchingWallet}
-            currentBalance={wallet?.balance as string}
-            onWithdraw={withdrawButtonHandler}
-          />
+          {wallets.map((wallet, i) => (
+            <BalanceCard
+              key={i}
+              fetchingWallet={fetchingWallet}
+              currentBalance={new BigNumber(!isNaN(Number(wallet?.platformBalance)) ? Number(wallet?.platformBalance) : 0).div(10 ** wallet?.token?.decimals).toFixed() as string}
+              // onWithdraw={withdrawButtonHandler}
+              tokenSymbol={wallet?.token?.symbol}
+            />
+          ))}
 
           <RecentTransactions
-            fetchingTransactions={fetchingWallet}
+            fetchingTransactions={fetchingTransactions}
             transactions={transactions}
           />
         </Grid>

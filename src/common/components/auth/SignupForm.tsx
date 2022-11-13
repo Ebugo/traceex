@@ -45,7 +45,7 @@ const SignupForm = () => {
           rowSpacing={2}
           sx={{ backgroundColor: (theme) => theme.palette.background.paper }}>
           <Grid item xs={12} sx={{ mb: 3 }}>
-            {medium && (
+            {/* {medium && ( */}
               <Typography
                 variant="h4"
                 component="div"
@@ -54,7 +54,7 @@ const SignupForm = () => {
               >
                 Create an account
               </Typography>
-            )}
+            {/* )} */}
 
             <Typography
               variant="caption"
@@ -68,7 +68,7 @@ const SignupForm = () => {
             </Typography>
           </Grid>
 
-          <Grid item xs={12}>
+          {/* <Grid item xs={12}>
             <Grid
               container
               spacing={1}
@@ -98,7 +98,7 @@ const SignupForm = () => {
                 </SocialButton>
               </Grid>
             </Grid>
-          </Grid>
+          </Grid> */}
 
           <Grid item xs={12} my={2}>
             <Typography
@@ -112,17 +112,17 @@ const SignupForm = () => {
 
           <Grid item xs={12}>
             <TextField
-              id="first_name"
+              id="firstName"
               label="First name"
               variant="outlined"
               autoComplete="off"
               fullWidth
-              {...getFieldProps('first_name')}
-              error={Boolean(touched.first_name && errors.first_name)}
+              {...getFieldProps('firstName')}
+              error={Boolean(touched.firstName && errors.firstName)}
               helperText={
                 <ErrorHelperText
-                  touched={touched.first_name}
-                  errorMessage={errors.first_name}
+                  touched={touched.firstName}
+                  errorMessage={errors.firstName}
                 />
               }
             />
@@ -130,17 +130,17 @@ const SignupForm = () => {
 
           <Grid item xs={12}>
             <TextField
-              id="last_name"
+              id="lastName"
               label="Last name"
               variant="outlined"
               autoComplete="off"
               fullWidth
-              {...getFieldProps('last_name')}
-              error={Boolean(touched.last_name && errors.last_name)}
+              {...getFieldProps('lastName')}
+              error={Boolean(touched.lastName && errors.lastName)}
               helperText={
                 <ErrorHelperText
-                  touched={touched.last_name}
-                  errorMessage={errors.last_name}
+                  touched={touched.lastName}
+                  errorMessage={errors.lastName}
                 />
               }
             />
@@ -160,6 +160,25 @@ const SignupForm = () => {
                 <ErrorHelperText
                   touched={touched.email}
                   errorMessage={errors.email}
+                />
+              }
+            />
+          </Grid>
+
+          <Grid item xs={12}>
+            <TextField
+              id="phone"
+              label="Phone number"
+              variant="outlined"
+              autoComplete="off"
+              type="phone"
+              fullWidth
+              {...getFieldProps('phone')}
+              error={Boolean(touched.phone && errors.phone)}
+              helperText={
+                <ErrorHelperText
+                  touched={touched.phone}
+                  errorMessage={errors.phone}
                 />
               }
             />

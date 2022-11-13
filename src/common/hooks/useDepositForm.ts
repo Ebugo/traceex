@@ -3,7 +3,7 @@ import * as Yup from 'yup';
 import { useFormik } from 'formik';
 import { Bank, Deposit, HttpErrorResponse } from '../../_types';
 import { dispatch } from '../redux/store';
-import { getAddress } from '../redux/actions/walletActions';
+import { getAddress, getWallet } from '../redux/actions/walletActions';
 import { getAccountNameApi, withdrawFundsApi } from '../../_apis_/wallet';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
@@ -52,7 +52,6 @@ const useDepositForm = () => {
       amount: '',
       coin: '',
       address: '',
-      pin: '',
     };
   }, []);
 
@@ -61,27 +60,27 @@ const useDepositForm = () => {
     initialValues,
     validationSchema,
     onSubmit: async (values, { setSubmitting }) => {
-      if (currentStep === 1) {
-        setCurrentStep(2);
-        return;
-      }
+      // if (currentStep === 1) {
+      //   setCurrentStep(2);
+      //   return;
+      // }
 
-      setSubmitting(true);
+      // setSubmitting(true);
 
-      try {
-        // const response = await withdrawFundsApi(values);
+      // try {
+      //   const response = await withdrawFundsApi(values);
 
-        // toast.success(response.message || `Withdrawal was successful`);
+      //   // toast.success(response.message || `Withdrawal was successful`);
 
-        router.push('/dashboard/wallet');
-      } catch (error: unknown) {
-        toast.error(
-          (error as HttpErrorResponse)?.message ||
-            `Failed to update transaction pin, please try again or contact an administrator`
-        );
-      }
+      //   router.push('/dashboard/wallet');
+      // } catch (error: unknown) {
+      //   toast.error(
+      //     (error as HttpErrorResponse)?.message ||
+      //       `Failed to update transaction pin, please try again or contact an administrator`
+      //   );
+      // }
 
-      setSubmitting(false);
+      // setSubmitting(false);
     },
   });
 
@@ -113,7 +112,7 @@ const useDepositForm = () => {
     if(values.coin && values.network) {
       const fetchAddress = async () => {
         setFetchingAddress(true);
-        await dispatch(getAddress());
+        await dispatch(getWallet(values.coin, values.network));
         setFetchingAddress(false);
       };
   

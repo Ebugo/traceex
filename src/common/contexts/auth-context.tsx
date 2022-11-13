@@ -33,9 +33,7 @@ import {
 
 export type AuthContextState = {
   isLoggedIn: boolean;
-  auth: Auth | null;
-  business: Business | null;
-  profile: Profile | null;
+  auth: Auth | null
   login: (
     email: string,
     password: string,
@@ -52,8 +50,6 @@ export type AuthContextState = {
 const AuthContext = React.createContext<AuthContextState>({
   isLoggedIn: false,
   auth: null,
-  business: null,
-  profile: null,
   login: () => undefined,
   logout: () => undefined,
   signup: () => undefined,
@@ -63,10 +59,7 @@ const AuthContext = React.createContext<AuthContextState>({
 export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [authDetails, setAuthDetails] = useState<Pick<
-    AuthSuccess,
-    'auth' | 'profile' | 'business'
-  > | null>(null);
+  const [authDetails, setAuthDetails] = useState<AuthSuccess['auth'] | null>(null);
 
   const isLoggedIn = !!authDetails;
 
@@ -79,18 +72,16 @@ export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
   ) => {
     const response = await signInApi(email, password);
 
-    const { access_token, refresh_token, auth, business, profile } =
-      response.data;
+    const { token } = response.data;
 
-    setSession(access_token);
-    setRefreshToken(refresh_token);
-    localStorage.setItem('authId', profile.auth_id);
+    setSession(token);
+    // setRefreshToken(refresh_token);
+    // localStorage.setItem('authId', profile.auth_id);
 
-    setRefreshTimeout();
+    // setRefreshTimeout();
+    setAuthDetails(response.data);
 
-    setAuthDetails({ auth, business, profile });
-
-    successCallBack && successCallBack(response);
+    successCallBack && successCallBack({auth: response.data, ...response});
   };
 
   const signupHandler = async (signupPayload: CreateProfile) => {
@@ -108,9 +99,9 @@ export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
 
   const doLogoutActions = useCallback(() => {
     setSession(null);
-    setRefreshToken(null);
+    // setRefreshToken(null);
 
-    refreshTokenTimout && clearTimeout(refreshTokenTimout);
+    // refreshTokenTimout && clearTimeout(refreshTokenTimout);
 
     setAuthDetails(null);
 
@@ -136,7 +127,7 @@ export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
         }
 
         const isTokenValid = isValidToken(accessToken);
-
+// console.log({isTokenValid})
         if (!isTokenValid) {
           throw new Error();
         }
@@ -144,12 +135,12 @@ export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
         setSession(accessToken);
 
         const { data } = await getProfileApi();
+console.log({data})
+        // const { auth } = data;
 
-        const { auth, business, profile } = data;
+        setAuthDetails(data);
 
-        setAuthDetails({ auth, business, profile });
-
-        await refreshToken();
+        // await refreshToken();
       } catch (err) {
         doLogoutActions();
       }
@@ -166,9 +157,7 @@ export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
 
   const contextValue = {
     isLoggedIn,
-    auth: authDetails?.auth || null,
-    business: authDetails?.business || null,
-    profile: authDetails?.profile || null,
+    auth: authDetails || null,
     login: loginHandler,
     logout: logoutHandler,
     signup: signupHandler,

@@ -4,6 +4,7 @@ import { Transaction } from '../../../../../_types';
 import DynamicHeroIcon from '../../../../elements/icons/DynamicHeroIcon';
 import { format } from 'date-fns';
 import { formatAsMoney } from '../../../../utils';
+import BigNumber from 'bignumber.js';
 
 const TransactionList: FC<{ transactions: Transaction[] }> = ({
   transactions,
@@ -46,7 +47,7 @@ const TransactionList: FC<{ transactions: Transaction[] }> = ({
 
             <Box display="flex" flexDirection="column">
               <Typography variant="details" fontSize="0.75rem" fontWeight={500}>
-                {transaction.reference}
+                {transaction.type}
               </Typography>
               <Typography variant="details" fontSize="0.75rem">
                 {transaction.type === 'debit'
@@ -59,7 +60,7 @@ const TransactionList: FC<{ transactions: Transaction[] }> = ({
                 sx={{ color: (theme) => theme.palette.secondary.main }}
               >
                 {format(
-                  new Date(transaction?.created_at ?? ''),
+                  new Date(transaction?.createdAt ?? ''),
                   'yyyy-MM-dd HH:mm:ss'
                 )}
               </Typography>
@@ -73,7 +74,7 @@ const TransactionList: FC<{ transactions: Transaction[] }> = ({
               sx={{ color: (theme) => theme.palette.text.primary }}
               align="right"
             >
-              {formatAsMoney(+transaction.amount, true)}
+              {formatAsMoney(Number(new BigNumber(!isNaN(Number(+transaction.amount)) ? Number(+transaction.amount) : 0).div(10 ** transaction?.wallet?.token?.decimals).toFixed()), true)} {transaction?.wallet?.token?.symbol || ""}
             </Typography>
 
             {/* <Typography

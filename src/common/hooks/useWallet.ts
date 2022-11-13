@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getWallet } from '../redux/actions/walletActions';
+import { getWallet, getWallets } from '../redux/actions/walletActions';
 import { dispatch } from '../redux/store';
 
 const useWallet = () => {
@@ -8,7 +8,7 @@ const useWallet = () => {
   useEffect(() => {
     const fetchWallet = async () => {
       setFetchingWallet(true);
-      await dispatch(getWallet());
+      await dispatch(getWallets());
       setFetchingWallet(false);
     };
 

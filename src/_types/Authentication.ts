@@ -1,27 +1,24 @@
 import { RolesEnum } from '../common/enums/roles.enum';
 export interface AuthSuccess {
   auth: Auth;
-  business: Business;
-  profile: Profile;
-  access_token: string;
-  refresh_token: string;
+  // business: Business;
+  // profile: Profile;
+  token: string;
+  refresh_token?: string;
 }
 
 export interface Auth {
-  id: string;
-  created_at: string;
-  updated_at: string;
-  role: RolesEnum;
-  password: string;
-  email_confirmed_at: string;
-  last_sign_in_at: string;
-  is_super_admin: boolean;
-  phone: string | null;
-  is_email_confirmed: boolean;
+  avatar: string;
+  createdAt: string;
   email: string;
-  email_confirm_token: string;
-  is_delete: boolean;
-  username: string;
+  firstName: string;
+  lastName: string;
+  location: string;
+  phone: string;
+  token: string;
+  updatedAt: string;
+  verifiedEmail: boolean;
+  verifiedPhone: boolean;
 }
 
 export interface Business {
@@ -45,8 +42,8 @@ export interface Profile {
   updated_at: string;
   role: string;
   auth_id: string;
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   email: string;
   phone: string | null;
   is_delete: boolean;
@@ -55,10 +52,10 @@ export interface Profile {
 
 export type CreateProfile = Pick<
   Profile,
-  'first_name' | 'last_name' | 'email'
+  'firstName' | 'lastName' | 'email' | 'phone'
 > & {
   password: string;
-  role?: Auth['role'];
+  // role?: Auth['role'];
 };
 
 export interface RefreshTokenPayload {

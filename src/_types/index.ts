@@ -36,5 +36,3 @@ export type {
 } from './Wallet';
 
 export type { CustomFile, UploadFileType, SingleUploadProps } from './Upload';
-
-export type { Team, CreateTeamMember, UpdateTeamMember } from './Team';

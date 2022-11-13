@@ -7,17 +7,25 @@ import { CreateProfile, HttpErrorResponse } from '../../_types';
 import { signUpApi } from '../../_apis_/authentication';
 import { RolesEnum } from '../enums';
 import { useRouter } from 'next/router';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 
 const useSignupForm = () => {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
 
   const validationSchema = Yup.object().shape({
-    first_name: Yup.string().required('First enter your first name only'),
-    last_name: Yup.string().required('Please enter your last name only'),
+    firstName: Yup.string().required('First enter your first name only'),
+    lastName: Yup.string().required('Please enter your last name only'),
     email: Yup.string()
       .required('Please provide a valid email address')
       .email('Please provide a valid email address'),
+    phone: Yup.string()
+      .required('Please provide a phone number')
+      .test(
+        'isValidPhoneNumber',
+        'Please provided a valid phone number',
+        (value) => isValidPhoneNumber(value || '')
+      ),
     password: Yup.string()
       .required('Please enter a password')
       .min(5, 'Password should be atleast 5 characters long'),
@@ -28,9 +36,10 @@ const useSignupForm = () => {
   });
 
   const initialValues = {
-    first_name: '',
-    last_name: '',
+    firstName: '',
+    lastName: '',
     email: '',
+    phone: '',
     password: '',
     confirm_password: '',
     acceptTerms: false,
@@ -55,7 +64,7 @@ const useSignupForm = () => {
         delete payloadToSend.confirm_password;
         delete payloadToSend.acceptTerms;
 
-        payloadToSend.role = RolesEnum.SUPERADMIN;
+        // payloadToSend.role = RolesEnum.SUPERADMIN;
 
         const response = await signUpApi(payloadToSend);
 
@@ -65,7 +74,7 @@ const useSignupForm = () => {
       } catch (error: unknown) {
         toast.error(
           (error as HttpErrorResponse)?.message ||
-            'Failed to signup, please try again or contact an administrator'
+          'Failed to signup, please try again or contact an administrator'
         );
       }
 

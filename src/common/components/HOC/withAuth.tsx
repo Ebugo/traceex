@@ -12,16 +12,16 @@ const withAuth = <T,>(Component: ComponentType<T>) => {
 
     useEffect(() => {
       const runGuard = async () => {
-        // const accessToken = localStorage.getItem('accessToken');
+        const accessToken = localStorage.getItem('accessToken');
 
-        // if (!accessToken) {
-        //   clearAuthDataLocalStorage();
+        if (!accessToken) {
+          clearAuthDataLocalStorage();
 
-        //   await router.replace('/auth/login');
+          await router.replace('/auth/login');
 
-        //   setChecking(true);
-        //   return;
-        // }
+          setChecking(true);
+          return;
+        }
 
         setChecking(false);
       };

@@ -1,3 +1,4 @@
+import { getExchangeApi } from '.';
 import {
   Auth,
   AuthSuccess,
@@ -12,14 +13,14 @@ import httpService from './httpService';
 export const signUpApi = async (
   payload: CreateProfile
 ): Promise<HttpSuccessResponse<AuthSuccess>> => {
-  return httpService.post('user/signup', payload);
+  return httpService.post(getExchangeApi() + 'auth/sign-up', payload);
 };
 
 export const signInApi = async (
-  email: Auth['email'],
+  user: Auth['email'],
   password: string
-): Promise<HttpSuccessResponse<AuthSuccess>> => {
-  return httpService.post('user/signin', { email, password });
+): Promise<HttpSuccessResponse<Pick<AuthSuccess, 'token'> & AuthSuccess['auth']>> => {
+  return httpService.post(getExchangeApi() + 'auth/sign-in', { user, password });
 };
 
 export const refreshTokenApi = async (
@@ -31,15 +32,15 @@ export const refreshTokenApi = async (
 };
 
 export const getProfileApi = async (): Promise<
-  HttpSuccessResponse<Pick<AuthSuccess, 'auth' | 'business' | 'profile'>>
+  HttpSuccessResponse<AuthSuccess['auth']>
 > => {
-  return httpService.get('user/me');
+  return httpService.get(getExchangeApi()+'user');
 };
 
 export const forgotPasswordApi = async (
   email: Auth['email']
 ): Promise<HttpSuccessResponse<string>> => {
-  return httpService.post('user/forgot-password', { email });
+  return httpService.post('auth/reset-password', { email });
 };
 
 export const updatePasswordApi = async (

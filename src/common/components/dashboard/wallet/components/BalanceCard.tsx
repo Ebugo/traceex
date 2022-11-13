@@ -1,10 +1,12 @@
 import { Grid, Skeleton, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import { FC } from 'react';
 import LightButton from '../../../../elements/LightButton';
 
 interface CommonBalanceCardProps {
   currentBalance: string;
   fetchingWallet: boolean;
+  tokenSymbol: string;
 }
 
 interface ShowWithdrawProps extends CommonBalanceCardProps {
@@ -22,9 +24,13 @@ type BalanceCardProps = ShowWithdrawProps | HideWithdrawProps;
 const BalanceCard: FC<BalanceCardProps> = ({
   currentBalance = '0',
   fetchingWallet = false,
-  onWithdraw,
+  // onWithdraw,
   hideWithdrawButton,
+  tokenSymbol
 }) => {
+  const { push } = useRouter();
+
+
   return (
     <Grid
       item
@@ -48,7 +54,7 @@ const BalanceCard: FC<BalanceCardProps> = ({
               fontSize={'0.75rem'}
               sx={{ color: (theme) => theme.palette.text.primary }}
             >
-              (NGN)
+              ({tokenSymbol})
             </Typography>
           </Typography>
         )}
@@ -66,7 +72,7 @@ const BalanceCard: FC<BalanceCardProps> = ({
               padding: '12px 32px',
               borderRadius: '8px',
             }}
-            onClick={onWithdraw}
+            onClick={()=>push("/dashboard/withdraw/crypto")}
             disabled={fetchingWallet || currentBalance === '0'}
           >
             Withdraw
