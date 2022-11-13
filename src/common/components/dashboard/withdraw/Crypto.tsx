@@ -198,7 +198,7 @@ const Crypto = () => {
                         }
                       />
                     </FormControl>
-                    <FormControl fullWidth>
+                    <FormControl fullWidth sx={{ paddingTop: "20px" }}>
                       <LoadingButton
                         disableElevation
                         disabled={!isValid}
