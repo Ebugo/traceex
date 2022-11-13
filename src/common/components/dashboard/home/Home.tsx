@@ -1,4 +1,4 @@
-import { Box, Grid, Stack } from '@mui/material';
+import { Box, Grid, Stack, Typography } from '@mui/material';
 import React from 'react';
 
 import BusinessOverview from './components/BusinessOverview';
@@ -15,6 +15,9 @@ const Home = () => {
     <Grid container spacing={2} sx={{ height: "100%", backgroundColor: (theme) => theme.palette.background.paper }}>
       <Grid item md={8} sx={{ height: "100%", backgroundColor: (theme) => theme.palette.background.default }}>
         <Stack>
+          <Typography variant="h5" component="div" gutterBottom px={4}>
+            Wallet Overview
+          </Typography>
           {/* <BusinessOverview fetchingBusinessMetrics={fetchingBusinessMetrics} /> */}
           <Wallet showHeader={false} showTransactions={false} />
         </Stack>
