@@ -7,7 +7,7 @@ export const ACCEPTED_DOCUMENT_TYPES = {
   // 'application/pdf': ['.pdf'],
 };
 
-export const SUPPORT_EMAIL = 'support@epay.com';
+export const SUPPORT_EMAIL = 'support@traceex.com';
 
 export { STATES } from './states';
 
