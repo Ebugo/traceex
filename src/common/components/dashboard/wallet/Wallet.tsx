@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import BigNumber from 'bignumber.js';
 import useTransactions from '../../../hooks/useTransactions';
 
-const Wallet = ({ showHeader = true, showTransactions = true }: { showHeader: boolean, showTransactions: boolean }) => {
+const Wallet = ({ showHeader = true, showTransactions = true }: { showHeader?: boolean, showTransactions?: boolean }) => {
   const router = useRouter();
 
   const { fetchingWallet } = useWallet();
