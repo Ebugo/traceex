@@ -45,6 +45,8 @@ export type AuthContextState = {
     successCallback: (authResponse: HttpSuccessResponse<string>) => void
   ) => void;
   signup: (payload: CreateProfile) => void;
+  business?: any;
+  profile?: any;
 };
 
 const AuthContext = React.createContext<AuthContextState>({
@@ -54,6 +56,8 @@ const AuthContext = React.createContext<AuthContextState>({
   logout: () => undefined,
   signup: () => undefined,
   forgotPassword: () => undefined,
+  business: {},
+  profile: {},
 });
 
 export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
@@ -81,7 +85,7 @@ export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
     // setRefreshTimeout();
     setAuthDetails(response.data);
 
-    successCallBack && successCallBack({auth: response.data, ...response});
+    successCallBack && successCallBack(response);
   };
 
   const signupHandler = async (signupPayload: CreateProfile) => {
@@ -162,6 +166,7 @@ console.log({data})
     logout: logoutHandler,
     signup: signupHandler,
     forgotPassword: forgotPasswordHandler,
+    business: {}
   };
 
   return (

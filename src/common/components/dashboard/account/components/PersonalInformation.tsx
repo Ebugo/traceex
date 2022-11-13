@@ -51,22 +51,22 @@ const PersonalInformation: FC<{
                 <Grid item xs={12}>
                   <FormControl fullWidth>
                     <FormLabel
-                      error={Boolean(touched.first_name && errors.first_name)}
+                      error={Boolean(touched.firstName && errors.firstName)}
                     >
                       First name
                     </FormLabel>
                     <TextField
                       disabled={!isEdit}
-                      id="first_name"
+                      id="firstName"
                       variant="outlined"
                       autoComplete="off"
                       placeholder="First name"
-                      {...getFieldProps('first_name')}
-                      error={Boolean(touched.first_name && errors.first_name)}
+                      {...getFieldProps('firstName')}
+                      error={Boolean(touched.firstName && errors.firstName)}
                       helperText={
                         <ErrorHelperText
-                          touched={touched.first_name}
-                          errorMessage={errors.first_name}
+                          touched={touched.firstName}
+                          errorMessage={errors.firstName}
                         />
                       }
                     />
@@ -76,22 +76,22 @@ const PersonalInformation: FC<{
                 <Grid item xs={12}>
                   <FormControl fullWidth>
                     <FormLabel
-                      error={Boolean(touched.last_name && errors.last_name)}
+                      error={Boolean(touched.lastName && errors.lastName)}
                     >
                       Last name
                     </FormLabel>
                     <TextField
                       disabled={!isEdit}
-                      id="last_name"
+                      id="lastName"
                       variant="outlined"
                       autoComplete="off"
                       placeholder="Last name"
-                      {...getFieldProps('last_name')}
-                      error={Boolean(touched.last_name && errors.last_name)}
+                      {...getFieldProps('lastName')}
+                      error={Boolean(touched.lastName && errors.lastName)}
                       helperText={
                         <ErrorHelperText
-                          touched={touched.last_name}
-                          errorMessage={errors.last_name}
+                          touched={touched.lastName}
+                          errorMessage={errors.lastName}
                         />
                       }
                     />

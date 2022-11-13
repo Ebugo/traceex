@@ -1,6 +1,6 @@
 import { RolesEnum } from '../common/enums/roles.enum';
 export interface AuthSuccess {
-  auth: Auth;
+  auth?: Auth;
   // business: Business;
   // profile: Profile;
   token: string;
@@ -71,5 +71,5 @@ export interface UpdatePassword {
 
 export type UpdateProfile = Pick<
   CreateProfile,
-  'first_name' | 'last_name' | 'email'
+  'firstName' | 'lastName' | 'email'
 >;

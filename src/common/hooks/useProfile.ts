@@ -16,13 +16,13 @@ const useProfile = () => {
   const updateUserFormik = useFormik<UpdateProfile>({
     enableReinitialize: true,
     initialValues: {
-      first_name: profile?.first_name ?? '',
-      last_name: profile?.last_name ?? '',
+      firstName: profile?.firstName ?? '',
+      lastName: profile?.lastName ?? '',
       email: profile?.email ?? '',
     },
     validationSchema: Yup.object().shape({
-      first_name: Yup.string().required('First name is required'),
-      last_name: Yup.string().required('Last name is required'),
+      firstName: Yup.string().required('First name is required'),
+      lastName: Yup.string().required('Last name is required'),
       email: Yup.string()
         .required('Email is required')
         .email('Please provide a valid email address'),
