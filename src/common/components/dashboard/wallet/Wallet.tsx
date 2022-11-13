@@ -10,7 +10,7 @@ import { useRouter } from 'next/router';
 import BigNumber from 'bignumber.js';
 import useTransactions from '../../../hooks/useTransactions';
 
-const Wallet = () => {
+const Wallet = ({ showHeader = true, showTransactions = true }: { showHeader: boolean, showTransactions: boolean }) => {
   const router = useRouter();
 
   const { fetchingWallet } = useWallet();
@@ -32,7 +32,7 @@ const Wallet = () => {
 
   return (
     <>
-      <ActionBar title="Wallet" hideButton hideSearch />
+      {showHeader && <ActionBar title="Wallet" hideButton hideSearch />}
 
       <Stack>
         <Grid
@@ -52,10 +52,10 @@ const Wallet = () => {
             />
           ))}
 
-          <RecentTransactions
+          {showTransactions && <RecentTransactions
             fetchingTransactions={fetchingTransactions}
             transactions={transactions}
-          />
+          />}
         </Grid>
       </Stack>
     </>
