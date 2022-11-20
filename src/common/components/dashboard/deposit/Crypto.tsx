@@ -8,6 +8,7 @@ import ErrorHelperText from '../../UI/ErrorHelperText';
 import { COINS, NETWORKS } from '../../../constants';
 import DynamicHeroIcon from '../../../elements/icons/DynamicHeroIcon';
 import useCoins from '../../../hooks/useCoins';
+import QRCode from 'react-qr-code';
 
 const Crypto = () => {
   const { coins, wallet } = useSelector(
@@ -177,6 +178,30 @@ const Crypto = () => {
                         lineHeight: '24px',
                         fontWeight: 400,
                       }}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <ListItemText
+                      // primary="Address"
+                      secondary="Copy the address above or scan the QR code below"
+                      primaryTypographyProps={{
+                        fontSize: '0.875rem',
+                        fontWeight: 500,
+                        lineHeight: '24px',
+                        pb: 1,
+                        color: (theme) => theme.palette.success.light
+                      }}
+                      secondaryTypographyProps={{
+                        fontSize: '0.75rem',
+                        lineHeight: '24px',
+                        fontWeight: 400,
+                      }}
+                    />
+                    <QRCode
+                      size={176}
+                      style={{ height: "176px", maxWidth: "176px", width: "100%" }}
+                      value={wallet.address}
+                      viewBox={`0 0 176 176`}
                     />
                   </Grid>
                   <Grid item xs={12}>

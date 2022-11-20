@@ -37,6 +37,7 @@
     "react-dropzone": "^14.2.2",
     "react-notifications-component": "^4.0.1",
     "react-number-format": "^4.9.3",
+    "react-qr-code": "^2.0.8",
     "react-redux": "^8.0.2",
     "react-social-login": "^3.4.15",
     "react-toastify": "^9.0.1",

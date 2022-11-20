@@ -61,7 +61,7 @@ const TransactionList: FC<{ transactions: Transaction[] }> = ({
               >
                 {format(
                   new Date(transaction?.createdAt ?? ''),
-                  'yyyy-MM-dd HH:mm:ss'
+                  'EEE LLL, yyyy hh:mm aaaa'
                 )}
               </Typography>
             </Box>
@@ -74,7 +74,7 @@ const TransactionList: FC<{ transactions: Transaction[] }> = ({
               sx={{ color: (theme) => theme.palette.text.primary }}
               align="right"
             >
-              {formatAsMoney(Number(new BigNumber(!isNaN(Number(+transaction.amount)) ? Number(+transaction.amount) : 0).div(10 ** transaction?.wallet?.token?.decimals).toFixed()), true)} {transaction?.wallet?.token?.symbol || ""}
+              {formatAsMoney(Number(new BigNumber(!isNaN(Number(+transaction.amount)) ? Number(+transaction.amount) : 0).div(10 ** transaction?.wallet?.token?.decimals).toFixed()), true)} {(transaction?.wallet?.token?.symbol || "")?.toUpperCase()}
             </Typography>
 
             {/* <Typography
