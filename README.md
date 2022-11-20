@@ -8,6 +8,11 @@ TraceEx is a custodial wallet exchange to send and receive crypto asset on layer
 [Signin](https://traceex.vercel.app/auth/login)
 [Signup](https://traceex.vercel.app/auth)
 
+### Supported Networks
+
+- [Metis](https://www.metis.io)
+- [AltLayer](https://altlayer.io)
+
 ### Sample Login
 
 - Email: admin@trace.exchange
