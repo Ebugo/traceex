@@ -21,7 +21,7 @@ const Crypto = () => {
   const { touched, errors, values, getFieldProps, isValid, isSubmitting } = withdrawFormik;
 
   const networkItems = [
-    { title: `${wallet?.token?.symbol} balance`, subtitle: `${balance} ${wallet?.token?.symbol}` },
+    { title: `${wallet?.token?.symbol?.toUpperCase()} balance`, subtitle: `${balance} ${wallet?.token?.symbol?.toUpperCase()}` },
     // { title: "Minimum withdrawal", subtitle: "0.00001 BTC" },
     // { title: "Network fee", subtitle: "0.000005 ~ 0.0002 BTC" },
     // { title: "24h remaining limit", subtitle: "8,000,000.00 BUSD/8,000,000.00 BUSD" },
