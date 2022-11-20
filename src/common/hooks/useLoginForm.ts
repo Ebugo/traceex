@@ -54,7 +54,7 @@ const useLoginForm = () => {
   });
 
   const handleSocialLogin = (user: Customer) => {
-    console.log(user);
+    // console.log(user);
   };
 
   const handleSocialLoginFailure = (err: unknown) => {

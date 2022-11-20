@@ -60,7 +60,7 @@ const LoginForm = () => {
               component="div"
               align={'left'}
             >
-              {`New to Epay? `}
+              {`New to TraceEx? `}
               <CustomLink href="/auth" variant="caption" color="primary">
                 Create an account
               </CustomLink>

@@ -13,7 +13,7 @@ const Crypto = () => {
   const { coins, wallet } = useSelector(
     (state: RootState) => state.walletSlice
   );
-  console.log({ coins })
+  // console.log({ coins })
   const { fetchingCoins } = useCoins();
   const { depositFormik, fetchingAddress } = useDepositForm();
   const { touched, errors, values, getFieldProps } = depositFormik;
@@ -86,7 +86,7 @@ const Crypto = () => {
                             value={option.symbol}
                             sx={{ fontSize: '0.875rem' }}
                           >
-                            {option.name}
+                            {option?.name}
                           </MenuItem>
                         ))}
                       </TextField>
@@ -152,7 +152,7 @@ const Crypto = () => {
             </FormikProvider>
           </Grid>
 
-          {values.network && values.coin && (<Grid container xs={12} py={4} md={8} ml="auto">
+          {(values.network && coins.filter(coin => coin.symbol === values.coin && coin.network === values?.network).length > 0) && values.coin && (<Grid container xs={12} py={4} md={8} ml="auto">
             {fetchingAddress
               ? (
                 <Grid item xs={12}>
@@ -214,7 +214,7 @@ const Crypto = () => {
                           lineHeight: '24px',
                           fontWeight: 400,
                         }}
-                          primary="Send only BTC to this deposit address." />
+                          primary={`Send only ${values?.coin?.toUpperCase()} to this deposit address.`} />
                       </ListItem>
                       <ListItem disablePadding>
                         <ListItemIcon>
@@ -225,7 +225,7 @@ const Crypto = () => {
                           lineHeight: '24px',
                           fontWeight: 400,
                         }}
-                          primary="Ensure the network is Bitcoin." />
+                          primary={`Ensure the network is ${values?.network}.`} />
                       </ListItem>
                       <ListItem disablePadding>
                         <ListItemIcon>

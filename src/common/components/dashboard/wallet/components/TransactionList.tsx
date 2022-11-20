@@ -51,8 +51,8 @@ const TransactionList: FC<{ transactions: Transaction[] }> = ({
               </Typography>
               <Typography variant="details" fontSize="0.75rem">
                 {transaction.type === 'debit'
-                  ? 'Cash withdrawal'
-                  : 'Cash deposit'}
+                  ? 'Withdrawal'
+                  : 'Deposit'}
               </Typography>
               <Typography
                 variant="details"

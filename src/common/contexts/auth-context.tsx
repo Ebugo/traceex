@@ -139,7 +139,7 @@ export const AuthContextProvider: NextPage<{ children: ReactNode }> = ({
         setSession(accessToken);
 
         const { data } = await getProfileApi();
-console.log({data})
+// console.log({data})
         // const { auth } = data;
 
         setAuthDetails(data);

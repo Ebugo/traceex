@@ -83,7 +83,7 @@ const useSignupForm = () => {
   });
 
   const handleSocialSignup = (user: CreateProfile & { confirm_password?: string; acceptTerms?: boolean }) => {
-    console.log(user);
+    // console.log(user);
   };
 
   const handleSocialSignupFailure = (err: unknown) => {

@@ -13,7 +13,7 @@ const Crypto = () => {
   const { coins, wallet } = useSelector(
     (state: RootState) => state.walletSlice
   );
-  console.log({ coins, wallet })
+  // console.log({ coins, wallet })
   const { fetchingCoins } = useCoins();
 
   const balance = new BigNumber(!isNaN(Number(wallet?.platformBalance)) ? Number(wallet?.platformBalance) : 0).div(10 ** wallet?.token?.decimals).toFixed();

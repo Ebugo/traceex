@@ -28,7 +28,7 @@ const GettingStartedCard: FC<GettingStartedCardProps> = ({
   );
 
   const { business } = useAuth();
-  console.log({ business })
+  // console.log({ business })
 
   return (
     <Grid

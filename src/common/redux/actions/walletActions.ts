@@ -32,7 +32,7 @@ export function getWallets() {
     dispatch(slice.actions.startLoading());
     try {
       const { data } = await getWalletsApi();
-      console.log({ data })
+      // console.log({ data })
 
       dispatch(slice.actions.getWalletsSuccess(data));
 
