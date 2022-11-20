@@ -54,7 +54,7 @@ const BalanceCard: FC<BalanceCardProps> = ({
               fontSize={'0.75rem'}
               sx={{ color: (theme) => theme.palette.text.primary }}
             >
-              ({tokenSymbol})
+              ({tokenSymbol.toUpperCase()})
             </Typography>
           </Typography>
         )}
