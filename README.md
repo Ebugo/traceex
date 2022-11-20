@@ -1,34 +1,29 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# TraceEx
 
-## Getting Started
+## L2 Centralised exchange
 
-First, run the development server:
+TraceEx is a custodial wallet exchange to send and receive crypto asset on layer 2 networks
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+[Website](https://traceex.vercel.app)
+[Signin](https://traceex.vercel.app/auth/login)
+[Signup](https://traceex.vercel.app/auth)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Sample Login
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+- Email: admin@trace.exchange
+- Password: Password123!
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Note
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- Phone number in the signup page should be entered in E.164 format ie (with dailing code and number) e.g. +16175551212
+- To receive test tokens, visit the [AltLayer Faucet](https://devnet-faucet.altlayer.io/app) and use the address provided in [Deposit](https://traceex.vercel.app/dashboard/deposit/crypto) Page or reach out on discord to `claretnnamocha#1699`
 
-## Learn More
+### Screenshots
 
-To learn more about Next.js, take a look at the following resources:
+![Overview](https://traceex.vercel.app/assets/Overview.png "Overview")
+![Wallet](https://traceex.vercel.app/assets/Wallet.png "Wallet")
+![Deposit crypto](https://traceex.vercel.app/assets/Deposit%20crypto.png "Deposit crypto")
+![Transfer crypto](https://traceex.vercel.app/assets/Transfer%20crypto.png "Transfer crypto")
+![Wallet after transaction](https://traceex.vercel.app/assets/Wallet%20after%20transaction.png "Wallet after transaction")
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Built by [@claretnnamocha](https://github.com/claretnnamocha) & [@ebugo](https://github.com/ebugo)
