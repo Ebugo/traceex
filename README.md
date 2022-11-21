@@ -8,6 +8,11 @@ TraceEx is a custodial wallet exchange to send and receive crypto asset on layer
 [Signin](https://traceex.vercel.app/auth/login)
 [Signup](https://traceex.vercel.app/auth)
 
+### Supported Networks
+
+- [Metis](https://www.metis.io)
+- [AltLayer](https://altlayer.io)
+
 ### Sample Login
 
 - Email: admin@trace.exchange
@@ -16,7 +21,7 @@ TraceEx is a custodial wallet exchange to send and receive crypto asset on layer
 ### Note
 
 - Phone number in the signup page should be entered in E.164 format ie (with dailing code and number) e.g. +16175551212
-- To receive test tokens, visit the [AltLayer Faucet](https://devnet-faucet.altlayer.io/app) and use the address provided in [Deposit](https://traceex.vercel.app/dashboard/deposit/crypto) Page or reach out on discord to `claretnnamocha#1699`
+- To receive test tokens, visit the [AltLayer Faucet](https://devnet-faucet.altlayer.io/app) or [Metis Faucet](https://goerli.faucet.metisdevops.link) and use the address provided in [Deposit](https://traceex.vercel.app/dashboard/deposit/crypto) Page or reach out on discord to `claretnnamocha#1699`
 
 ### Screenshots
 
